@@ -1,0 +1,62 @@
+//users/index
+.jumbotron-extend {
+  background: url(../images/top-bg.jpg) no-repeat center center;
+  background-size: cover;
+  height: 80vh;
+  min-height: 300px;
+}
+
+.jumbotron-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media screen and (min-width: 600px) and (max-width: 960px) {
+  .first-view-title {
+    font-size: 45px;
+  } 
+}
+
+.search-container {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.recommend-wrapper {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.recommend-title {
+  text-decoration: underline orange 4px;
+  text-underline-offset:0.5em;
+}
+
+.card-container {
+  height: 370px;
+}
+
+.card-container img {
+  width: 100%;
+  height: 370px;
+  object-fit: cover;
+}
+
+//users/sign_in & sign_up
+
+.account-form {
+  margin-top: 100px;
+  width: 640px;
+  height: 100%;
+}
+
+.registration-form {
+  margin-top: 100px;
+  width: 640px;
+  height: 100%;
+}
+
+@media screen and  (max-width: 1280px) {
+  .account-form, .registration-form{
+    width: 480px;
+  }
+}

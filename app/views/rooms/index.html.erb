@@ -1,0 +1,44 @@
+<div class="container">
+  <h2 class="my-4">登録済み一覧</h2>
+  <div class="table-responsive">
+    <table class="table text-nowrap align-middle">
+      <thead>
+        <tr>
+          <th scope="col">画像</th>
+          <th scope="col">施設名</th>
+          <th scope="col">紹介文</th>
+          <th scope="col">料金</th>
+          <th scope="col">作成日</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @rooms.each do |room| %>
+          <tr>
+            <td>
+              <% if room.room_image.present? %>
+                <%= image_tag room.room_image.url, class:"index-img", alt: "施設画像" %>
+              <% else %>
+                <%= image_tag("defaultroom.png", class: "index-img") %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to room.name, room_path(room) %>
+            </td>
+            <td><%= room.information %></td>
+            <td>¥ <%= number_with_delimiter(room.price) %></td>
+            <td><%= room.created_at.localtime.strftime("%Y-%m-%d") %></td>
+            <td>
+              <%= link_to edit_room_path(room), class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fas fa-pen"></i>
+              <% end %>
+              <%= link_to room_path(room) , class: "btn btn-danger text-white", method: :delete, data: { confirm: "本当に削除しますか?" } do %>
+                <i class="far fa-trash-alt"></i> 
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

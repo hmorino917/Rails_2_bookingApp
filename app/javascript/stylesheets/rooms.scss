@@ -1,0 +1,30 @@
+//rooms/show
+.info-wrapper {
+  padding-top: 20px;
+  background-color: #fff5ee;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 992px){
+  .info-wrapper {
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .info-wrapper {
+    margin-left: 70px;
+    padding-bottom: 20px;
+  }
+}
+
+//reservations/show
+.confirm-wrapper {
+  max-width: 700px;
+}
+
+//reservations/index
+.index-img {
+  width: 120px;
+  height: auto;
+}

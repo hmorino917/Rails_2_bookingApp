@@ -1,0 +1,33 @@
+<div class="card registration-form mx-auto">
+  <div class="card-body">
+    <h2 class="card-tytle text-center mt-3 mb-3">新規登録</h2>
+    <%= form_with model: @user, url: user_registration_path do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="mb-3">
+        <%= f.label :name, class:"form-label" %><span class="text-danger"> *</span><br>
+        <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"ユーザー名を入力" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :email, class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control", placeholder:"メールアドレスを入力" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password, class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control",  placeholder:"パスワードを入力" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :password_confirmation, class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control",  placeholder:"確認用パスワードを入力" %>
+      </div>
+
+      <div class="d-grid gap-4 mb-4 mt-4">
+        <%= f.submit "新しいアカウントを作成", class: "btn btn-warning w-100" %>
+        <%= link_to "アカウントをお持ちの方はログイン", new_session_path(resource_name), class: "btn bg-secondary-subtle w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>
