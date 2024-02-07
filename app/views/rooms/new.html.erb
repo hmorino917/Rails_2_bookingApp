@@ -1,0 +1,42 @@
+<% if @room.errors.any? %>
+  <div class="alert alert-danger w-50 mt-3">
+    <ul class="mb-0">
+      <% @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="card registration-form mx-auto">
+  <div class="card-body">
+    <h2 class="card-tytle text-center mt-3 mb-3">新規登録</h2>
+    <%= form_with model: @room do |f| %>
+
+      <div class="mb-3">
+        <%= f.label :name, "施設名", class:"form-label" %><span class="text-danger"> *</span><br>
+        <%= f.text_field :name, autofocus: true, class:"form-control", placeholder:"施設名を入力" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :information, "施設詳細", class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.text_area :information, autofocus: true, class:"form-control", placeholder:"施設詳細を入力" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :price, "料金", class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.text_field :price, class:"form-control",  placeholder:"１日あたりの料金を入力" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :address, "住所", class:"form-label" %><span class="text-danger"> *</span><br />
+        <%= f.text_field :address, class:"form-control",  placeholder:"住所を入力" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :room_image, "施設画像", class:"form-label" %><br />
+        <%= f.file_field :room_image, class:"form-control" %>
+      </div>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <div class="d-grid gap-4 mb-4 mt-4">
+        <%= f.submit "保存", class: "btn btn-warning w-100" %>
+        <%= link_to "キャンセル", users_index_path, class: "btn bg-secondary-subtle w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="search-wraper bg-body-secondary d-flex justify-content-center py-5 mb-4">
+  <%= form_with url: search_path, method: :get, class:"row g-3", role: "search" do |f| %>
+    <div class="col-sm-5">
+      <%= f.text_field :area, class:"form-control", placeholder: "エリア名を入力" %>
+    </div>
+    <div class="col-sm-5">
+      <%= f.text_field :keyword, class:"form-control", placeholder: "キーワード名を入力" %>
+    </div>
+    <div class="col-auto">
+      <%= f.submit "検索", class:"btn btn-secondary text-white" %>
+    </div>      
+  <% end %>  
+</div>
+
+<div class="container">
+  <% if @reservation.errors.any? %>
+    <div class="alert alert-danger w-100 mb-3">
+      <ul class="mb-0">
+        <% @reservation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="d-flex justify-content-between">
+    <%= link_to '← 戻る', :back, class:"h5 link-primary" %>
+    <% if @room.user == current_user %>
+      <%= link_to "編集", [:edit, @room], class:"h5 link-primary" %>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="img-wrapper col-lg-5 mt-3 mb-5">
+      <% if @room.room_image.present? %>
+        <%= image_tag @room.room_image.url, class:"card-img-top", alt: "施設画像" %>
+      <% else %>
+        <%= image_tag("defaultroom.png", class: "card-img-top") %>
+      <% end %>    
+    </div>
+    <div class="info-wrapper col-lg-6 mt-3">
+      <div class="justify-content-between d-flex">
+        <p class="h4"><%= @room.name %></p>
+        <p class="price h3 strong text-danger pe-4">¥ <%= number_with_delimiter(@room.price) %></p>      
+      </div>
+      <small><%= @room.address %></small><br>
+      <span class="text-warning">★★★★★</span>
+      <p class="card-text py-3"><%= @room.information %></p>
+      <div class="">
+        <%= form_with model: @reservation, url: confirm_reservations_path, method: :post, class:"row g-2" do |f| %>
+          <%= f.hidden_field:room_id, value:@room.id %>
+          <%= f.hidden_field:user_id, value:current_user.id %>
+          <div class="col-5">
+            <%= f.label :check_in, "チェックイン", class:"form-lavel" %>
+            <%= f.text_field :check_in, id: 'check_in', class:"form-control", placeholder:"  ----/--/--" %>
+          </div>
+          <div class="col-5">
+            <%= f.label :check_out, "チェックアウト", class:"form-lavel" %>
+            <%= f.text_field :check_out, id: 'check_out', class:"form-control", placeholder:"  ----/--/--" %>
+          </div>
+          <div class="col-2">
+            <%= f.label :guest_count, "人数", class:"form-lavel" %>
+            <%= f.text_field :guest_count, class:"form-control", placeholder:" 0" %>
+          </div>
+          <%= f.submit "予約する", class: "btn btn-warning w-100 mt-5" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
