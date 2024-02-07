@@ -45,7 +45,7 @@
       <span class="text-warning">★★★★★</span>
       <p class="card-text py-3"><%= @room.information %></p>
       <div class="">
-        <%= form_with model: @reservation, url: confirm_reservations_path, method: :post, class:"row g-2" do |f| %>
+        <%= form_with model: @reservation, url: confirm_reservations_path, method: :get, class:"row g-2" do |f| %>
           <%= f.hidden_field:room_id, value:@room.id %>
           <%= f.hidden_field:user_id, value:current_user.id %>
           <div class="col-5">

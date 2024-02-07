@@ -36,7 +36,6 @@ class ReservationsController < ApplicationController
     @room = @reservation.room
     if @reservation.update(reservation_params)
       calc_reservation_details
-      binding.pry
       redirect_to reservations_path, success: "予約が更新されました"
     else
       render :edit

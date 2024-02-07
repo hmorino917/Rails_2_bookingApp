@@ -26,7 +26,7 @@
       </tbody>  
     </table>
     <p>上記内容で正しければ「予約を確定」ボタンを押してください。</p>
-    <%= form_with model: @reservation, method: :post do |f| %>
+    <%= form_with model: @reservation, url: reservations_path, method: :post do |f| %>
       <%= f.hidden_field :check_in, value: @reservation.check_in %>
       <%= f.hidden_field :check_out, value: @reservation.check_out %>
       <%= f.hidden_field :guest_count, value: @guest_count %>
