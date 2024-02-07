@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      reservation:
+        check_in: "チェックイン"
+        check_out: "チェックアウト"
+        guest_count: "宿泊人数"
+      room:
+        name: "施設名"
+        information: "施設詳細"
+        price: "料金"
+        address: "住所"
+        room_image: "施設画像"

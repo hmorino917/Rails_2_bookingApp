@@ -1,0 +1,48 @@
+<div class="container">
+  <h2 class="my-4">予約済み一覧</h2>
+  <div class="table-responsive">
+    <table class="table text-nowrap align-middle">
+      <thead>
+        <tr>
+          <th scope="col">画像</th>
+          <th scope="col">施設名</th>
+          <th scope="col">紹介文</th>
+          <th scope="col">合計料金</th>
+          <th scope="col">チェックイン</th>
+          <th scope="col">チェックアウト</th>
+          <th scope="col">予約確定日時</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td>
+              <% if reservation.room.room_image.present? %>
+                <%= image_tag reservation.room.room_image.url, class:"index-img", alt: "施設画像" %>
+              <% else %>
+                <%= image_tag("defaultroom.png", class: "index-img") %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to reservation.room.name, room_path(reservation.room) %>
+            </td>
+            <td><%= reservation.room.information %></td>
+            <td>¥ <%= number_with_delimiter(reservation.sum_price) %></td>
+            <td><%= reservation.check_in %></td>
+            <td><%= reservation.check_out %></td>
+            <td><%= reservation.created_at.localtime.strftime("%Y-%m-%d %H:%M") %></td>
+            <td>
+              <%= link_to edit_reservation_path(reservation), class: "btn btn btn-secondary text-white", method: :get do %>
+                <i class="fas fa-pen"></i>
+              <% end %>
+              <%= link_to reservation_path(reservation) , class: "btn btn-danger text-white", method: :delete, data: { confirm: "本当に削除しますか?" } do %>
+                <i class="far fa-trash-alt"></i> 
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<header class="header fixed-top d-flex flex-wrap justify-content-between py-3">
+
+  <div class="d-flex align-items-center ms-5 mb-md-0 me-md-auto">
+    <%= link_to "Potepan Share", users_index_path , class:"display-6 text-light text-decoration-none" %>
+  </div>
+
+  <% if user_signed_in? %>
+    <div class="dropdown text-end mb-md-0 me-5">
+      <% if current_user.profile_image.present? %>
+        <%= image_tag current_user.profile_image.url, alt: "プロフィール画像", class:"rounded-circle mx-4", style: "height: 40px; width: 40px;" %>
+      <% else %>
+        <%= image_tag("default.png", style: "height: 40px; width: 40px;", class:"mx-4") %>
+      <% end %>
+      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= current_user.name %>
+      </button>
+
+      <ul class="dropdown-menu text-small">
+        <li><a class="dropdown-item" href="/rooms/new">施設の新規登録</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/reservations">予約済み一覧</a></li>
+        <li><a class="dropdown-item" href="/rooms">登録済み一覧</a></li>
+        <li><a class="dropdown-item" href="/users/account">アカウント設定</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/users/sign_out" data-method="get">ログアウト</a></li>
+      </ul>
+    </div>
+
+
+  <% else %>
+    <div class="d-md-flex justify-content-md-end gap-2 me-5">
+      <%= button_to "ログイン", new_session_path(resource_name), method: :get, class:"btn bg-white" %>
+      <%= button_to "サインアップ", new_user_registration_path, method: :get, class:"btn btn-warning" %>
+    </div>
+  <% end %>
+
+</header>

@@ -1,0 +1,45 @@
+<div class="container-fluid" style="height:600px">
+  <div class="row h-100">
+    <div class="sidebar border-right col-lg-2 col-md-3 col-sm-3 p-0 mt-5" >
+      <p class="d-flex align-items-center m-3 mb-md-3 me-md-auto">
+        <span class="fs-4">設定</span>
+      </p>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-5">
+        <li class="nav-item">
+          <%= link_to "アカウント編集", users_account_path, class:"nav-link active" %>
+        </li>
+        <li>
+          <%= link_to "プロフィール編集", users_profiles_show_path, class:"nav-link link-body-emphasis", aria_current:"page" %>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col">
+      <div class="container-fluid">
+        <div class="row mt-5 mb-4 justify-content-between">
+          <div class="col-5">
+            <h2>アカウント</h2>
+          </div>
+          <div class="col-3">
+            <%= button_to "編集", edit_user_registration_path, method: :get, class: "btn btn-primary text-white" %>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <table class="table table-borderless mt-5" style="height:200px">
+        <tbody>
+          <tr>
+            <th scope="row" class="col-4">メールアドレス</th>
+            <td><%= current_user.email %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="col-4">パスワード</th>
+            <td>*********</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="confirm-wrapper mx-auto mt-5">
+    <h1 class="pt-3 pb-3">予約内容の確認</h1>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">チェックイン</th>
+          <td class="text-end"><%= @reservation.check_in %></td>
+        </tr>
+        <tr>
+          <th scope="row">チェックアウト</th>
+          <td class="text-end"><%= @reservation.check_out %></td>
+        </tr>
+        <tr>
+          <th scope="row">日数</th>
+          <td class="text-end"><%= @stay_days %>日</td>
+        </tr>
+        <tr>
+          <th scope="row">人数</th>
+          <td class="text-end"><%= @guest_count %>人</td>
+        </tr>
+        <tr>
+          <th scope="row">お支払い金額</th>
+          <td class="text-end">¥ <%= number_with_delimiter(@sum_price) %></td>
+        </tr>
+      </tbody>  
+    </table>
+    <p>上記内容で正しければ「予約を確定」ボタンを押してください。</p>
+    <%= form_with model: @reservation, url: reservations_path, method: :post do |f| %>
+      <%= f.hidden_field :check_in, value: @reservation.check_in %>
+      <%= f.hidden_field :check_out, value: @reservation.check_out %>
+      <%= f.hidden_field :guest_count, value: @guest_count %>
+      <%= f.hidden_field :sum_price, value: @sum_price %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "予約を確定", class: "btn btn-warning w-100 mb-3" %>
+    <% end %>
+    <%= link_to "キャンセル", room_path(@room), class: "btn btn-secondary w-100" %>    
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="search-wraper bg-body-secondary d-flex justify-content-center py-5 mb-4">
+  <%= form_with url: search_path, method: :get, class:"row g-3", role: "search" do |f| %>
+    <div class="col-sm-5">
+      <%= f.text_field :area, class:"form-control", placeholder: "エリア名を入力" %>
+    </div>
+    <div class="col-sm-5">
+      <%= f.text_field :keyword, class:"form-control", placeholder: "キーワード名を入力" %>
+    </div>
+    <div class="col-auto">
+      <%= f.submit "検索", class:"btn btn-secondary text-white" %>
+    </div>      
+  <% end %>  
+</div>
+
+<div class="container">
+  <p class="h4"><%= @rooms_count %> 件が見つかりました。</p>  
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @search_rooms.each do |room| %>
+      <div class="col">
+        <div class="card h-100 border-light bg-warning-subtle">
+          <% if room.room_image.present? %>
+            <%= image_tag room.room_image.url, class:"card-img-top", alt: "施設画像" %>
+          <% else %>
+            <%= image_tag("defaultroom.png", class: "card-img-top") %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= room.name %></h5>
+            <small><%= room.address %></small><br>
+            <span class="text-warning">★★★★★</span>
+            <p class="card-text"><%= room.information %></p>
+            <p class="price card-text h5 strong text-danger">¥ <%= number_with_delimiter(room.price) %></p>
+            <%= link_to "詳細はこちら", room_path(room), class: "btn btn-warning w-100" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
